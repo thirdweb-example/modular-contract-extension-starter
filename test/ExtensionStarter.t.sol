@@ -3,15 +3,17 @@ pragma solidity ^0.8.0;
 
 import "lib/forge-std/src/console.sol";
 
-import {OwnableRoles} from "@solady/auth/OwnableRoles.sol";
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 
-import {ModularCore} from "src/ModularCore.sol";
-import {ModularExtension} from "src/ModularExtension.sol";
-
-import {Role} from "src/Role.sol";
-import {ERC721Core} from "src/core/token/ERC721Core.sol";
+import {Role} from "@modular-contracts/Role.sol";
+import {ERC721Core} from "@modular-contracts/core/token/ERC721Core.sol";
 import {ExtensionStarterStorage, ExtensionStarter} from "../src/ExtensionStarter.sol";
+
+interface IERC20 {
+    function mint(address to, uint256 amount) external;
+
+    function balanceOf(address account) external view returns (uint256);
+}
 
 contract ClaimableERC721Test is Test {
     ERC721Core public core;

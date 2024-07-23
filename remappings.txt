@@ -1,3 +1,4 @@
 ds-test/=lib/modular-contracts/lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
-@modular-contracts/=lib/modular-contracts/src
+@modular-contracts/=lib/modular-contracts/src/
+@solady/=lib/solady/src/
