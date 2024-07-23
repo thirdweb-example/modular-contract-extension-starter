@@ -27,6 +27,8 @@ library ExtensionStarterStorage {
 /// @notice This starter template is meant to be used as a starting point for
 ///        developing your own extension.
 contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
+    event MintPriceSet(uint256 mintPrice);
+
     /// @notice Returns the Extension Configuration.
     /// @dev The Extension Configuration includes the followings:
     ///      - callbackFunctions: The array of callback functions that the extension implements.
@@ -59,7 +61,7 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
 
         // The array of required interfaces that the extension requires of the core.
         config.requiredInterfaces = new bytes4[](1);
-        config.requiredInterfaces[0] = 0x36372b07; // ERC20
+        config.requiredInterfaces[0] = 0x80ac58cd; // ERC721.
 
         // The array of interfaces that the extension supports.
         config.supportedInterfaces = new bytes4[](1);
@@ -109,6 +111,7 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
     ///      This function can only be called with the correct permissions.
     function setMintPrice(uint256 _mintPrice) external {
         _starterStorage().mintPrice = _mintPrice;
+        emit MintPriceSet(_mintPrice);
     }
 
     /// @notice utility function to help get the storage data for the extension
