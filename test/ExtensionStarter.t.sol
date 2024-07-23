@@ -33,14 +33,7 @@ contract ExtensionStarterTest is Test {
         address[] memory extensions;
         bytes[] memory extensionData;
 
-        core = new ERC721Core(
-            "test",
-            "TEST",
-            "",
-            owner,
-            extensions,
-            extensionData
-        );
+        core = new ERC721Core("test", "TEST", "", owner, extensions, extensionData);
         extension = new ExtensionStarter();
 
         // install extension

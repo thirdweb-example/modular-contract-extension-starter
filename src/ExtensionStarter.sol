@@ -8,8 +8,7 @@ import {Role} from "@modular-contracts/Role.sol";
 library ExtensionStarterStorage {
     /// @custom:storage-location erc7201:token.minting.claimable.erc721
     bytes32 public constant STARTER_STORAGE_POSITION =
-        keccak256(abi.encode(uint256(keccak256("extension.starter")) - 1)) &
-            ~bytes32(uint256(0xff));
+        keccak256(abi.encode(uint256(keccak256("extension.starter")) - 1)) & ~bytes32(uint256(0xff));
 
     /// @notice The structure of the extension's storage.
     struct Data {
@@ -36,28 +35,16 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
     ///      - requiredInterfaces: The array of required interfaces that the extension requires of the core.
     ///      - supportedInterfaces: The array of interfaces that the extension supports.
     ///      - registerInstallationCallback: Whether to register the onInstall and onUninstall callbacks.
-    function getExtensionConfig()
-        external
-        pure
-        override
-        returns (ExtensionConfig memory config)
-    {
+    function getExtensionConfig() external pure override returns (ExtensionConfig memory config) {
         // The array of callback functions that the extension implements.
         config.callbackFunctions = new CallbackFunction[](1);
-        config.callbackFunctions[0] = CallbackFunction(
-            this.beforeMintERC721.selector
-        );
+        config.callbackFunctions[0] = CallbackFunction(this.beforeMintERC721.selector);
 
         // The array of fallback functions that the extension implements.
         config.fallbackFunctions = new FallbackFunction[](2);
-        config.fallbackFunctions[0] = FallbackFunction(
-            this.getMintPrice.selector,
-            0
-        );
-        config.fallbackFunctions[1] = FallbackFunction({
-            selector: this.setMintPrice.selector,
-            permissionBits: Role._MANAGER_ROLE
-        });
+        config.fallbackFunctions[0] = FallbackFunction(this.getMintPrice.selector, 0);
+        config.fallbackFunctions[1] =
+            FallbackFunction({selector: this.setMintPrice.selector, permissionBits: Role._MANAGER_ROLE});
 
         // The array of required interfaces that the extension requires of the core.
         config.requiredInterfaces = new bytes4[](1);
@@ -86,16 +73,14 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
     ///
     ///      For a list of all possible callbacks from the current core
     ///      contract offerings, reference the README.
-    function beforeMintERC721(
-        address _to,
-        uint256 _startTokenId,
-        uint256 _quantity,
-        bytes memory _data
-    ) external payable virtual override returns (bytes memory) {
-        require(
-            msg.value == _starterStorage().mintPrice * _quantity,
-            "Insufficient ETH sent"
-        );
+    function beforeMintERC721(address _to, uint256 _startTokenId, uint256 _quantity, bytes memory _data)
+        external
+        payable
+        virtual
+        override
+        returns (bytes memory)
+    {
+        require(msg.value == _starterStorage().mintPrice * _quantity, "Insufficient ETH sent");
     }
 
     /// @notice Fetches the mint price.
@@ -115,11 +100,7 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
     }
 
     /// @notice utility function to help get the storage data for the extension
-    function _starterStorage()
-        internal
-        pure
-        returns (ExtensionStarterStorage.Data storage)
-    {
+    function _starterStorage() internal pure returns (ExtensionStarterStorage.Data storage) {
         return ExtensionStarterStorage.data();
     }
 }
