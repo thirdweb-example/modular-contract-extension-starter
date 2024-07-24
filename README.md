@@ -1,66 +1,23 @@
-## Foundry
+## Modular Contract - Extension Starter Template
+This is a starter template for developing your own extensions for Modular Contracts.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repo showcases an ERC721 extensions that allows users to mint an NFT with a fixed price.
 
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+### All callback functions currently available
+| ERC      | Callback                                |
+|----------|-----------------------------------------|
+| ERC20    | BeforeApproveCallbackERC20.sol          |
+| ERC721   | BeforeApproveCallbackERC721.sol         |
+| ERC721, ERC1155 | BeforeApproveForAllCallback.sol         |
+| ERC1155  | BeforeBatchMintCallbackERC1155.sol      |
+| ERC1155  | BeforeBatchTransferCallbackERC1155.sol  |
+| ERC1155  | BeforeBurnCallbackERC1155.sol           |
+| ERC20    | BeforeBurnCallbackERC20.sol             |
+| ERC721   | BeforeBurnCallbackERC721.sol            |
+| ERC1155  | BeforeMintCallbackERC1155.sol           |
+| ERC20    | BeforeMintCallbackERC20.sol             |
+| ERC721   | BeforeMintCallbackERC721.sol            |
+| ERC1155  | BeforeTransferCallbackERC1155.sol       |
+| ERC20    | BeforeTransferCallbackERC20.sol         |
+| ERC721   | BeforeTransferCallbackERC721.sol        |
+| ERC721, ERC1155 | OnTokenURICallback.sol           |
