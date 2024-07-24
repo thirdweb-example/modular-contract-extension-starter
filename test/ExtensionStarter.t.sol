@@ -33,14 +33,21 @@ contract ExtensionStarterTest is Test {
         address[] memory extensions;
         bytes[] memory extensionData;
 
-        core = new ERC721Core("test", "TEST", "", owner, extensions, extensionData);
+        core = new ERC721Core(
+            "test",
+            "TEST",
+            "",
+            owner,
+            extensions,
+            extensionData
+        );
         extension = new ExtensionStarter();
 
         // install extension
         bytes memory encodedInstallParams = abi.encode(1 ether);
         core.installExtension(address(extension), encodedInstallParams);
 
-        // Give permissioned actor minter role
+        // give owner manager role
         core.grantRoles(owner, Role._MANAGER_ROLE);
 
         vm.stopPrank();
