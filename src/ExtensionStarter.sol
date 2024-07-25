@@ -6,7 +6,7 @@ import {BeforeMintCallbackERC721} from "@modular-contracts/callback/BeforeMintCa
 import {Role} from "@modular-contracts/Role.sol";
 
 library ExtensionStarterStorage {
-    /// @custom:storage-location erc7201:token.minting.claimable.erc721
+    /// @custom:storage-location erc7201:extension.starter
     bytes32 public constant STARTER_STORAGE_POSITION =
         keccak256(abi.encode(uint256(keccak256("extension.starter")) - 1)) & ~bytes32(uint256(0xff));
 
@@ -52,7 +52,7 @@ contract ExtensionStarter is ModularExtension, BeforeMintCallbackERC721 {
 
         // The array of interfaces that the extension supports.
         config.supportedInterfaces = new bytes4[](1);
-        config.supportedInterfaces[0] = 0x000000;
+        config.supportedInterfaces[0] = 0x00000000;
 
         // Flag to check whether to register the onInstall and onUninstall callbacks.
         config.registerInstallationCallback = true;
